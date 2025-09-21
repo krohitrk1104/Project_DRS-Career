@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRS Career - Interactive E-Learning Platform</title>
+   <link rel="stylesheet" href="styles.css">
+     
+</head>
+<>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <h2>Loading DRS Career...</h2>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo"><img src="./logo//DRS logo.png" height="50px" />DRS Career</a>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showPage('home')">Home</a></li>
+                <li><a href="#" onclick="showPage('about')">About</a></li>
+                <li><a href="#" onclick="showPage('campus-tour')">Campus Tour</a></li>
+                <li><a href="#" onclick="showPage('industry-tour')">Industry Tour</a></li>
+                <li><a href="#" onclick="showPage('workshops')">Workshops</a></li>
+                <li><a href="#" onclick="showPage('Mentor')">Mentor</a></li>
+                <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+               <<!-- <li><a href='#' onclick="showpage('login')">Login</a></li> -->
+                <!--Login page of html file in different file.....-->
+            </ul>
+            <div class="mobile-menu" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page-section active">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Welcome to DRS Career </h1>
+                <p>Bridging Education with Real-World Experience</p>
+                <button class="cta-button" onclick="showPage('about')">Explore Our Platform</button>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Our Vision</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="icon">🎯</div>
+                    <h3>Mission</h3>
+                    <p>To revolutionize education by connecting students with real-world experiences through campus and industry tours, creating a bridge between theoretical knowledge and practical application and mentor them in their sucess.</p>
+                </div>
+                <div class="about-card">
+                    <div class="icon">👁️</div>
+                    <h3>Vision</h3>
+                    <p>Empowering the next generation of leaders and innovators by providing immersive learning experiences that inspire, educate, and prepare students for successful careers.</p>
+                </div>
+                <div class="about-card">
+                    <div class="icon">💡</div>
+                    <h3>Innovation</h3>
+                    <p>Leveraging cutting-edge technology and partnerships to create unique educational opportunities that transform how students learn and grow.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section" style="background: var(--bg-light);">
+            <h2 class="section-title">Our College Partners</h2>
+            <div class="partners-container">
+                <div class="partner-card">
+                    <div class="partner-logo">🏛️</div>
+                    <h3>Tech University</h3>
+                    <p>Leading technology and engineering programs</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">🎓</div>
+                    <h3>Business Institute</h3>
+                    <p>Premier business and management education</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">🔬</div>
+                    <h3>Science Academy</h3>
+                    <p>Advanced research and scientific studies</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">🎨</div>
+                    <h3>Arts College</h3>
+                    <p>Creative arts and design excellence</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Industry Partners</h2>
+            <div class="partners-container">
+                <div class="partner-card">
+                    <div class="partner-logo">💻</div>
+                    <h3>TechCorp Solutions</h3>
+                    <p>Software Development & IT Services</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">🏭</div>
+                    <h3>Manufacturing Plus</h3>
+                    <p>Advanced Manufacturing & Automation</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">🏥</div>
+                    <h3>HealthTech Industries</h3>
+                    <p>Healthcare Technology & Innovation</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">🚀</div>
+                    <h3>StartUp Hub</h3>
+                    <p>Entrepreneurship & Innovation Center</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section" style="background: var(--bg-light);">
+            <h2 class="section-title">Upcoming Workshops</h2>
+            <div class="workshop-grid">
+                <div class="workshop-card">
+                    <h3>AI & Machine Learning</h3>
+                    <p>Explore the fundamentals of artificial intelligence and machine learning with hands-on projects.</p>
+                    <div class="workshop-date">📅 October 15, 2024</div>
+                </div>
+                <div class="workshop-card">
+                    <h3>Digital Marketing Mastery</h3>
+                    <p>Learn modern digital marketing strategies and tools to boost your online presence.</p>
+                    <div class="workshop-date">📅 October 22, 2024</div>
+                </div>
+                <div class="workshop-card">
+                    <h3>Entrepreneurship Bootcamp</h3>
+                    <p>Transform your ideas into successful businesses with our intensive startup workshop.</p>
+                    <div class="workshop-date">📅 November 5, 2024</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Campus Tour Page -->
+    <div id="campus-tour" class="page-section">
+        <div class="tour-hero">
+            <h1>Campus Tours</h1>
+            <p>Explore world-class educational institutions and discover your perfect learning environment</p>
+        </div>
+        
+        <section class="content-section">
+            <div class="tour-grid">
+                <div class="tour-card">
+                    <div class="tour-image">🏫</div>
+                    <div class="tour-content">
+                        <h3>Tech University Campus</h3>
+                        <p>Experience our state-of-the-art facilities including modern labs, research centers, and collaborative spaces designed for innovation.</p>
+                        <div class="tour-meta">
+                            <span>📍 Silicon Valley</span>
+                            <span>⏰ 2 Hours</span>
+                            <span>👥 30 Students</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tour-card">
+                    <div class="tour-image">🎓</div>
+                    <div class="tour-content">
+                        <h3>Business Institute Tour</h3>
+                        <p>Discover our business school facilities, trading floor simulation lab, and entrepreneurship center.</p>
+                        <div class="tour-meta">
+                            <span>📍 New York</span>
+                            <span>⏰ 3 Hours</span>
+                            <span>👥 25 Students</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tour-card">
+                    <div class="tour-image">🔬</div>
+                    <div class="tour-content">
+                        <h3>Science Academy Labs</h3>
+                        <p>Tour our advanced research laboratories, observatory, and experimental facilities.</p>
+                        <div class="tour-meta">
+                            <span>📍 Boston</span>
+                            <span>⏰ 2.5 Hours</span>
+                            <span>👥 20 Students</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tour-card">
+                    <div class="tour-image">🎨</div>
+                    <div class="tour-content">
+                        <h3>Arts College Studios</h3>
+                        <p>Visit our creative spaces including art studios, performance halls, and digital media labs.</p>
+                        <div class="tour-meta">
+                            <span>📍 Los Angeles</span>
+                            <span>⏰ 2 Hours</span>
+                            <span>👥 15 Students</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Industry Tour Page -->
+    <div id="industry-tour" class="page-section">
+        <div class="tour-hero" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+            <h1>Industry Tours</h1>
+            <p>Get hands-on experience and insights from leading companies and industries</p>
+        </div>
+        
+        <section class="content-section">
+            <div class="tour-grid">
+                <div class="tour-card">
+                    <div class="tour-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">💼</div>
+                    <div class="tour-content">
+                        <h3>TechCorp Development Center</h3>
+                        <p>Witness cutting-edge software development, agile practices, and meet industry professionals.</p>
+                        <div class="tour-meta">
+                            <span>📍 Tech Park</span>
+                            <span>⏰ 4 Hours</span>
+                            <span>👥 40 Students</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tour-card">
+                    <div class="tour-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">🏭</div>
+                    <div class="tour-content">
+                        <h3>Smart Manufacturing Plant</h3>
+                        <p>Experience Industry 4.0 with automated production lines and robotics in action.</p>
+                        <div class="tour-meta">
+                            <span>📍 Industrial Zone</span>
+                            <span>⏰ 3 Hours</span>
+                            <span>👥 35 Students</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tour-card">
+                    <div class="tour-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">🏥</div>
+                    <div class="tour-content">
+                        <h3>HealthTech Innovation Lab</h3>
+                        <p>Explore medical technology, AI in healthcare, and breakthrough research facilities.</p>
+                        <div class="tour-meta">
+                            <span>📍 Medical District</span>
+                            <span>⏰ 3.5 Hours</span>
+                            <span>👥 25 Students</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tour-card">
+                    <div class="tour-image" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">🚀</div>
+                    <div class="tour-content">
+                        <h3>StartUp Incubator Visit</h3>
+                        <p>Meet entrepreneurs, learn about startup culture, and explore innovation ecosystems.</p>
+                        <div class="tour-meta">
+                            <span>📍 Innovation Hub</span>
+                            <span>⏰ 2.5 Hours</span>
+                            <span>👥 30 Students</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Workshops Page -->
+    <div id="workshops" class="page-section">
+        <div class="tour-hero" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+            <h1>Professional Workshops</h1>
+            <p>Enhance your skills with expert-led workshops and hands-on training sessions</p>
+        </div>
+        
+        <section class="content-section">
+            <h2 class="section-title">Featured Workshops</h2>
+            <div class="workshop-grid">
+                <div class="workshop-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <h3>🤖 AI & Machine Learning</h3>
+                    <p>Deep dive into neural networks, computer vision, and natural language processing with practical projects.</p>
+                    <div class="workshop-date">📅 October 15, 2024 | Duration: 2 Days</div>
+                </div>
+                <div class="workshop-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <h3>📱 Mobile App Development</h3>
+                    <p>Build cross-platform mobile applications using React Native and Flutter frameworks.</p>
+                    <div class="workshop-date">📅 October 22, 2024 | Duration: 3 Days</div>
+                </div>
+                <div class="workshop-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                    <h3>☁️ Cloud Computing</h3>
+                    <p>Master AWS, Azure, and Google Cloud platforms with hands-on deployment exercises.</p>
+                    <div class="workshop-date">📅 November 5, 2024 | Duration: 2 Days</div>
+                </div>
+                <div class="workshop-card" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                    <h3>📊 Data Analytics</h3>
+                    <p>Learn data visualization, statistical analysis, and business intelligence tools.</p>
+                    <div class="workshop-date">📅 November 12, 2024 | Duration: 2 Days</div>
+                </div>
+                <div class="workshop-card" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                    <h3>🔒 Cybersecurity Essentials</h3>
+                    <p>Understanding network security, ethical hacking, and security best practices.</p>
+                    <div class="workshop-date">📅 November 20, 2024 | Duration: 3 Days</div>
+                </div>
+                <div class="workshop-card" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                    <h3>💼 Leadership & Management</h3>
+                    <p>Develop essential leadership skills and learn modern management techniques.</p>
+                    <div class="workshop-date">📅 December 1, 2024 | Duration: 1 Day</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page-section">
+        <section class="content-section">
+            <h1 class="section-title">About DRS Career </h1>
+            <div style="max-width: 800px; margin: 0 auto; text-align: center; margin-bottom: 50px;">
+                <p style="font-size: 1.2rem; line-height: 1.8; color: #555;">
+                    DRS Career is a pioneering e-learning platform that bridges the gap between theoretical education and practical industry experience. Founded in 2020, we have partnered with over 50 educational institutions and 100+ industry leaders to provide immersive learning experiences.
+                </p>
+            </div>
+            
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="icon">📚</div>
+                    <h3>10,000+</h3>
+                    <p>Students Enrolled</p>
+                </div>
+                <div class="about-card">
+                    <div class="icon">🏢</div>
+                    <h3>100+</h3>
+                    <p>Industry Partners</p>
+                </div>
+                <div class="about-card">
+                    <div class="icon">🎓</div>
+                    <h3>50+</h3>
+                    <p>Educational Institutions</p>
+                </div>
+                <div class="about-card">
+                    <div class="icon">🏆</div>
+                    <h3>95%</h3>
+                    <p>Student Satisfaction</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 80px;">
+                <h2 class="section-title">Our Core Values</h2>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <div class="icon">💡</div>
+                        <h3>Innovation</h3>
+                        <p>Constantly evolving our platform with cutting-edge technology and teaching methods.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="icon">🤝</div>
+                        <h3>Collaboration</h3>
+                        <p>Building strong partnerships between academia and industry for mutual growth.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="icon">🌟</div>
+                        <h3>Excellence</h3>
+                        <p>Maintaining the highest standards in education and professional development.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page-section">
+        <section class="content-section">
+            <h1 class="section-title">Get In Touch</h1>
+            <div style="max-width: 600px; margin: 0 auto;">
+                <form id="contactForm" style="background: white; padding: 40px; border-radius: 15px; box-shadow: var(--card-shadow);">
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; margin-bottom: 8px; color: var(--text-dark); font-weight: 500;">Name</label>
+                        <input type="text" id="name" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; transition: all 0.3s ease;" required>
+                    </div>
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; margin-bottom: 8px; color: var(--text-dark); font-weight: 500;">Email</label>
+                        <input type="email" id="email" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; transition: all 0.3s ease;" required>
+                    </div>
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; margin-bottom: 8px; color: var(--text-dark); font-weight: 500;">Subject</label>
+                        <select id="subject" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; transition: all 0.3s ease;">
+                            <option>Campus Tour Inquiry</option>
+                            <option>Industry Tour Inquiry</option>
+                            <option>Workshop Registration</option>
+                            <option>Partnership Opportunity</option>
+                            <option>General Inquiry</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; margin-bottom: 8px; color: var(--text-dark); font-weight: 500;">Message</label>
+                        <textarea id="message" rows="5" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; resize: vertical; transition: all 0.3s ease;" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button" style="width: 100%; cursor: pointer;">Send Message</button>
+                </form>
+                </section>
+            </div>
+            
+            <div class="about-grid" style="margin-top: 80px;">
+                <div class="about-card">
+                    <div class="icon">📍</div>
+                    <h3>Address</h3>
+                    <p>Katihar Engineering college, katihar<br>Hardiyaganj Hazipur ,katihar 854109</p>
+                </div>
+                <div class="about-card">
+                    <div class="icon">📧</div>
+                    <h3>Email</h3>
+                    <p>drs.career.info@gmail.com<br>contgrow.under.org1@gmail.com</p>
+                </div>
+                <div class="about-card">
+                    <div class="icon">📞</div>
+                    <h3>Phone</h3>
+                    <p>+91 9525868973 <br>+91 6205364154</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About DRS Career </h3>
+                <p>Transforming education through immersive experiences and industry connections. Join us in shaping the future of learning.</p>
+                <div class="social-icons">
+                    <div class="social-icon">📘</div>
+                    <div class="social-icon">🐦</div>
+                    <div class="social-icon">📷</div>
+                    <div class="social-icon">💼</div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li onclick="showPage('home')">Home</li>
+                    <li onclick="showPage('campus-tour')">Campus Tours</li>
+                    <li onclick="showPage('industry-tour')">Industry Tours</li>
+                    <li onclick="showPage('workshops')">Workshops</li>
+                    <li onclick="showPage('about')">About Us</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li>Student Portal</li>
+                    <li>Partner Login</li>
+                    <li>Blog</li>
+                    <li>Career Opportunities</li>
+                    <li>FAQ</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Subscribe to get updates on new tours and workshops</p>
+                <div style="margin-top: 20px;">
+                    <input type="email" placeholder="Your email" style="padding: 10px; border-radius: 5px; border: none; width: 100%; margin-bottom: 10px;">
+                    <button class="cta-button" style="width: 100%; padding: 10px;">Subscribe</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 DRS Career . All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <span class="toast-icon">✅</span>
+            <span id="toast-message">Success!</span>
+        </div>
+    </div>
+
+<script src="./script.js"></script>
+
+</body>
+</html>
+
+
+
+
