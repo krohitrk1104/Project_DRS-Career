@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - DRS Career</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Dashboard-specific styles */
+        body {
+            background: var(--bg-light) !important;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px 0;
+            box-shadow: var(--card-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dashboard-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .notifications {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .notifications:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .user-info:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .user-details h3 {
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+
+        .user-details p {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .logout-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Main Layout */
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            padding: 30px 0;
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 25px;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background: linear-gradient(135deg, rgba(74, 0, 224, 0.1), rgba(142, 45, 226, 0.1));
+            border-left-color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .sidebar-nav .icon {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            gap: 30px;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            animation: slideDown 0.6s ease;
+        }
+
+        .welcome-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 25px;
+            animation: slideUp 0.6s ease 0.2s both;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 15px;
+            animation: slideUp 0.6s ease 0.4s both;
+        }
+
+        .quick-action-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+        }
+
+        .quick-action-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-3px);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .stat-trend {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+
+        .trend-up {
+            color: var(--success-color);
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+        }
+
+        .section-header {
+            padding: 25px 30px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-light);
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .section-action {
+            background: var(--primary-color);
+            color: white;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .section-action:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .section-content {
+            padding: 30px;
+        }
+
+        /* Course Cards */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .course-card {
+            border: 1px solid #eee;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: var(--primary-color);
+        }
+
+        .course-image {
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+        }
+
+        .course-content {
+            padding: 20px;
+        }
+
+        .course-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .course-progress {
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #eee;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        /* Activity Feed */
+        .activity-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+
+        .activity-item:hover {
+            background: var(--bg-light);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: white;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-text {
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .activity-time {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                position: static;
+                order: 2;
+            }
+            
+            .main-content {
+                order: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 15px;
+            }
+            
+            .user-menu {
+                gap: 10px;
+            }
+            
+            .user-details {
+                display: none;
+            }
+            
+            .dashboard-container {
+                padding: 20px 15px;
+            }
+            
+            .welcome-content h1 {
+                font-size: 2rem;
+            }
+            
+            .quick-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .quick-action-btn {
+                text-align: center;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Dashboard sections */
+        .dashboard-section {
+            display: none;
+        }
+
+        .dashboard-section.active {
+            display: block;
+        }
+
+        /* Success and warning colors */
+        .success-color { color: #28a745; }
+        .warning-color { color: #ffc107; }
+        .info-color { color: #17a2b8; }
+        .text-muted { color: #6c757d; }
+        .border-radius { border-radius: 15px; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="dashboard-header">
+        <div class="header-content">
+            <div class="dashboard-logo">
+                <span class="logo-icon">🎓</span>
+                <span>DRS Career Dashboard</span>
+            </div>
+            
+            <div class="user-menu">
+                <div class="notifications" onclick="showNotifications()">
+                    🔔
+                    <span class="notification-badge">3</span>
+                </div>
+                
+                <div class="user-info" onclick="showUserMenu()">
+                    <div class="user-avatar" id="userAvatar">U</div>
+                    <div class="user-details">
+                        <h3 id="userName">Loading...</h3>
+                        <p id="userEmail">Loading...</p>
+                    </div>
+                </div>
+                
+                <a href="index.html" class="logout-btn" onclick="logout()">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#dashboard" class="nav-link active" onclick="showSection('dashboard')">
+                        <span class="icon">📊</span>
+                        <span>Dashboard</span>
+                    </a></li>
+                    <li><a href="#courses" class="nav-link" onclick="showSection('courses')">
+                        <span class="icon">📚</span>
+                        <span>My Courses</span>
+                    </a></li>
+                    <li><a href="#tours" class="nav-link" onclick="showSection('tours')">
+                        <span class="icon">🚌</span>
+                        <span>Tours</span>
+                    </a></li>
+                    <li><a href="#workshops" class="nav-link" onclick="showSection('workshops')">
+                        <span class="icon">🔧</span>
+                        <span>Workshops</span>
+                    </a></li>
+                    <li><a href="#profile" class="nav-link" onclick="showSection('profile')">
+                        <span class="icon">👤</span>
+                        <span>Profile</span>
+                    </a></li>
+                    <li><a href="index.html" class="nav-link">
+                        <span class="icon">🏠</span>
+                        <span>Back to Home</span>
+                    </a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <div id="dashboard-section" class="dashboard-section active">
+                <!-- Welcome Section -->
+                <section class="welcome-section">
+                    <div class="welcome-content">
+                        <h1 id="welcomeMessage">Welcome back!</h1>
+                        <p>Ready to continue your learning journey? Check out your progress and explore new opportunities.</p>
+                        <div class="quick-actions">
+                            <button class="quick-action-btn" onclick="showSection('courses')">Continue Learning</button>
+                            <a href="index.html#campus-tour" class="quick-action-btn">Book Tour</a>
+                            <a href="index.html#workshops" class="quick-action-btn">Join Workshop</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-value" id="completedCourses">2</div>
+                                <div class="stat-label">Courses Completed</div>
+                            </div>
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #28a745, #20c997);">📚</div>
+                        </div>
+                        <div class="stat-trend trend-up">
+                            ↗️ +2 this month
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-value" id="totalTours">3</div>
+                                <div class="stat-label">Tours Attended</div>
+                            </div>
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #17a2b8, #138496);">🚌</div>
+                        </div>
+                        <div class="stat-trend trend-up">
+                            ↗️ +1 this week
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-value" id="totalWorkshops">5</div>
+                                <div class="stat-label">Workshops Joined</div>
+                            </div>
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #ffc107, #e0a800);">🔧</div>
+                        </div>
+                        <div class="stat-trend trend-up">
+                            ↗️ +3 this month
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-value" id="totalCertificates">2</div>
+                                <div class="stat-label">Certificates Earned</div>
+                            </div>
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #dc3545, #c82333);">🏆</div>
+                        </div>
+                        <div class="stat-trend trend-up">
+                            ↗️ +1 this month
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Recent Activity</h2>
+                        <a href="#" class="section-action">View All</a>
+                    </div>
+                    <div class="section-content">
+                        <div class="activity-item">
+                            <div class="activity-icon" style="background: #28a745;">✅</div>
+                            <div class="activity-content">
+                                <div class="activity-text">Completed "AI & Machine Learning" workshop</div>
+                                <div class="activity-time">2 hours ago</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon" style="background: #17a2b8;">🚌</div>
+                            <div class="activity-content">
+                                <div class="activity-text">Attended Tech University Campus Tour</div>
+                                <div class="activity-time">Yesterday</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon" style="background: #ffc107;">📚</div>
+                            <div class="activity-content">
+                                <div class="activity-text">Started "Digital Marketing Mastery" course</div>
+                                <div class="activity-time">3 days ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Courses Section -->
+            <div id="courses-section" class="dashboard-section">
+                <div class="content-section">
+                    <div class="section-header">
+                        <h2 class="section-title">My Courses</h2>
+                        <a href="index.html#workshops" class="section-action">Browse Courses</a>
+                    </div>
+                    <div class="section-content">
+                        <div class="courses-grid" id="coursesGrid">
+                            <div class="course-card">
+                                <div class="course-image">🤖</div>
+                                <div class="course-content">
+                                    <div class="course-title">AI & Machine Learning</div>
+                                    <div class="course-meta">
+                                        <span>📅 Started Oct 15</span>
+                                        <span>⏱️ 8 weeks</span>
+                                    </div>
+                                    <div class="course-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 75%;"></div>
+                                        </div>
+                                        <div class="progress-text">75% completed</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="course-card">
+                                <div class="course-image">📱</div>
+                                <div class="course-content">
+                                    <div class="course-title">Digital Marketing Mastery</div>
+                                    <div class="course-meta">
+                                        <span>📅 Started Oct 22</span>
+                                        <span>⏱️ 6 weeks</span>
+                                    </div>
+                                    <div class="course-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 40%;"></div>
+                                        </div>
+                                        <div class="progress-text">40% completed</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tours Section -->
+            <div id="tours-section" class="dashboard-section">
+                <div class="content-section">
+                    <div class="section-header">
+                        <h2 class="section-title">My Tours</h2>
+                        <a href="index.html#campus-tour" class="section-action">Book New Tour</a>
+                    </div>
+                    <div class="section-content">
+                        <div class="activity-item">
+                            <div class="activity-icon" style="background: #28a745;">🏫</div>
+                            <div class="activity-content">
+                                <div class="activity-text">Tech University Campus Tour - Completed</div>
+                                <div class="activity-time">📍 Silicon Valley • 📅 Oct 20, 2024</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon" style="background: #ffc107;">🏭</div>
+                            <div class="activity-content">
+                                <div class="activity-text">Smart Manufacturing Plant - Upcoming</div>
+                                <div class="activity-time">📍 Industrial Zone • 📅 Nov 5, 2024</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon" style="background: #17a2b8;">🚀</div>
+                            <div class="activity-content">
+                                <div class="activity-text">StartUp Incubator Visit - Available</div>
+                                <div class="activity-time">📍 Innovation Hub • Book now</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Workshops Section -->
+            <div id="workshops-section" class="dashboard-section">
+                <div class="content-section">
+                    <div class="section-header">
+                        <h2 class="section-title">My Workshops</h2>
+                        <a href="index.html#workshops" class="section-action">Browse Workshops</a>
+                    </div>
+                    <div class="section-content">
+                        <div class="courses-grid">
+                            <div class="course-card">
+                                <div class="course-image">🤖</div>
+                                <div class="course-content">
+                                    <div class="course-title">AI & Machine Learning</div>
+                                    <div class="course-meta">
+                                        <span>📅 Oct 15, 2024</span>
+                                        <span class="success-color">✅ Completed</span>
+                                    </div>
+                                    <div style="margin-top: 15px;">
+                                        <span style="background: #28a745; color: white; padding: 5px 15px; border-radius: 15px; font-size: 0.8rem;">Certificate Earned</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="course-card">
+                                <div class="course-image">📊</div>
+                                <div class="course-content">
+                                    <div class="course-title">Data Analytics</div>
+                                    <div class="course-meta">
+                                        <span>📅 Nov 12, 2024</span>
+                                        <span class="warning-color">⏰ Upcoming</span>
+                                    </div>
+                                    <div style="margin-top: 15px;">
+                                        <button style="background: var(--primary-color); color: white; border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer;">Join Workshop</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Section -->
+            <div id="profile-section" class="dashboard-section">
+                <div class="content-section">
+                    <div class="section-header">
+                        <h2 class="section-title">My Profile</h2>
+                        <button class="section-action" onclick="editProfile()">Edit Profile</button>
+                    </div>
+                    <div class="section-content">
+                        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 30px;">
+                            <div style="text-align: center;">
+                                <div class="user-avatar" style="width: 120px; height: 120px; font-size: 3rem; margin: 0 auto 20px;" id="profileAvatar">U</div>
+                                <h3 style="margin-bottom: 10px;" id="profileName">Student User</h3>
+                                <p style="color: #6c757d; margin-bottom: 20px;" id="profileClass">Undergraduate</p>
+                            </div>
+                            <div>
+                                <div style="display: grid; gap: 20px;">
+                                    <div>
+                                        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: var(--text-dark);">Full Name</label>
+                                        <input type="text" id="profileNameInput" value="Student User" style="width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 8px;" readonly>
+                                    </div>
+                                    <div>
+                                        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: var(--text-dark);">Email</label>
+                                        <input type="email" id="profileEmailInput" value="student@example.com" style="width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 8px;" readonly>
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                        <div>
+                                            <label style="display: block; margin-bottom: 5px; font-weight: 600; color: var(--text-dark);">Class</label>
+                                            <input type="text" id="profileClassInput" value="Undergraduate" style="width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 8px;" readonly>
+                                        </div>
+                                        <div>
+                                            <label style="display: block; margin-bottom: 5px; font-weight: 600; color: var(--text-dark);">Phone</label>
+                                            <input type="text" id="profilePhoneInput" value="+1234567890" style="width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 8px;" readonly>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: var(--text-dark);">School/College</label>
+                                        <input type="text" id="profileSchoolInput" value="DRS Career Institute" style="width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 8px;" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeDashboard();
+            loadUserData();
+        });
+
+        function initializeDashboard() {
+            // Check authentication
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Show dashboard section by default
+            showSection('dashboard');
+            
+            // Load user data from localStorage
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            
+            if (user.name) {
+                document.getElementById('userName').textContent = user.name;
+                document.getElementById('userEmail').textContent = user.email;
+                document.getElementById('welcomeMessage').textContent = `Welcome back, ${user.name}!`;
+                
+                // Set user avatar
+                const avatar = document.getElementById('userAvatar');
+                const profileAvatar = document.getElementById('profileAvatar');
+                const initial = user.name.charAt(0).toUpperCase();
+                avatar.textContent = initial;
+                profileAvatar.textContent = initial;
+
+                // Update profile information
+                document.getElementById('profileName').textContent = user.name;
+                document.getElementById('profileClass').textContent = user.class || 'Undergraduate';
+                document.getElementById('profileNameInput').value = user.name;
+                document.getElementById('profileEmailInput').value = user.email;
+                document.getElementById('profileClassInput').value = user.class || 'Undergraduate';
+                document.getElementById('profilePhoneInput').value = user.phone || '+1234567890';
+                document.getElementById('profileSchoolInput').value = user.school || 'DRS Career Institute';
+            } else {
+                // Redirect to login if no user data
+                window.location.href = 'login.html';
+                return;
+            }
+        }
+
+        function loadUserData() {
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            
+            // Simulate loading user stats
+            setTimeout(() => {
+                document.getElementById('completedCourses').textContent = user.completedCourses || '2';
+                document.getElementById('totalTours').textContent = user.completedTours || '3';
+                document.getElementById('totalWorkshops').textContent = '5';
+                document.getElementById('totalCertificates').textContent = '2';
+            }, 500);
+        }
+
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.dashboard-section').forEach(section => {
+                section.classList.remove('active');
+                section.style.display = 'none';
+            });
+            
+            // Remove active class from nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Show selected section
+            const selectedSection = document.getElementById(`${sectionName}-section`);
+            if (selectedSection) {
+                selectedSection.style.display = 'block';
+                selectedSection.classList.add('active');
+                
+                // Add active class to corresponding nav link
+                const navLink = document.querySelector(`[onclick="showSection('${sectionName}')"]`);
+                if (navLink) {
+                    navLink.classList.add('active');
+                }
+            }
+            
+            // Create sections dynamically if they don't exist
+            if (sectionName === 'workshops' && !document.getElementById('workshops-section')) {
+                createWorkshopsSection();
+            }
+        }
+
+        function createWorkshopsSection() {
+            const mainContent = document.querySelector('.main-content');
+            const workshopsSection = document.createElement('div');
+            workshopsSection.id = 'workshops-section';
+            workshopsSection.className = 'dashboard-section';
+            // Section content is already in HTML above
+            mainContent.appendChild(workshopsSection);
+        }
+
+        function showNotifications() {
+            alert('Notifications:\n\n1. New workshop available: "Cybersecurity Essentials"\n2. Congratulations! You\'ve earned a certificate\n3. Reminder: Manufacturing Plant tour tomorrow');
+        }
+
+        function showUserMenu() {
+            // Could implement user menu dropdown here
+            console.log('User menu clicked');
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                window.location.href = 'login.html';
+            }
+        }
+
+        function editProfile() {
+            alert('Profile editing feature will be available soon!');
+        }
+
+        // Check authentication on page load
+        window.addEventListener('load', function() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Handle browser back button
+        window.addEventListener('popstate', function(event) {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Add some interactivity to course cards
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.course-card')) {
+                const courseTitle = e.target.closest('.course-card').querySelector('.course-title').textContent;
+                console.log('Clicked on course:', courseTitle);
+            }
+        });
+
+        // Add hover effects to stats cards
+        document.querySelectorAll('.stat-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Update stats with animation
+        function animateStats() {
+            const statValues = document.querySelectorAll('.stat-value');
+            statValues.forEach(stat => {
+                const finalValue = parseInt(stat.textContent);
+                let currentValue = 0;
+                const increment = finalValue / 30;
+                
+                const timer = setInterval(() => {
+                    currentValue += increment;
+                    if (currentValue >= finalValue) {
+                        stat.textContent = finalValue;
+                        clearInterval(timer);
+                    } else {
+                        stat.textContent = Math.floor(currentValue);
+                    }
+                }, 50);
+            });
+        }
+
+        // Call animate stats after page load
+        setTimeout(animateStats, 1000);
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - DRS Career</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Dashboard-specific styles */
+        body {
+            background: var(--bg-light) !important;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px 0;
+            box-shadow: var(--card-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dashboard-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .notifications {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .notifications:hover {
+            background: rgba(255,255,255,0.2);
+        
